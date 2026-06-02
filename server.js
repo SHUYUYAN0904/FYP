@@ -101,7 +101,7 @@ app.post('/reports', async (req, res) => {
     try {
         let connection = await mysql.createConnection(dbConfig);
         await connection.execute(
-            'INSERT INTO report (report_title, report_date, importance, user_id, category_id, description, status) VALUES (?, ?, ?, ?, ?, ?, ?)',
+            'INSERT INTO reports (report_title, report_date, importance, user_id, category_id, description, status) VALUES (?, ?, ?, ?, ?, ?, ?)',
             [report_title, report_date, importance, user_id, category_id, description, status]
         );
         res.status(201).json({ message: 'Report ' + report_title + ' added successfully' });
@@ -118,7 +118,7 @@ app.put('/reports/:id', async (req, res) => {
     try {
         let connection = await mysql.createConnection(dbConfig);
         await connection.execute(
-            'UPDATE report SET report_title = ?, report_date = ?, importance = ?, user_id = ?, category_id = ?, description = ?, status = ? WHERE report_id = ?',
+            'UPDATE reports SET report_title = ?, report_date = ?, importance = ?, user_id = ?, category_id = ?, description = ?, status = ? WHERE report_id = ?',
             [report_title, report_date, importance, user_id, category_id, description, status, id]
         );
         res.status(200).json({ message: 'Report ' + id + ' updated successfully' });
@@ -134,7 +134,7 @@ app.delete('/reports/:id', async (req, res) => {
     try {
         let connection = await mysql.createConnection(dbConfig);
         await connection.execute(
-            'DELETE FROM report WHERE report_id = ?',
+            'DELETE FROM reports WHERE report_id = ?',
             [id]
         );
         res.status(200).json({ message: 'Report ' + id + ' deleted successfully' });
