@@ -80,7 +80,7 @@ app.get('/reports/:id', async (req, res) => {
     try {
         let connection = await mysql.createConnection(dbConfig);
         const [rows] = await connection.execute(
-            'SELECT * FROM report WHERE report_id = ?',
+            'SELECT * FROM reports WHERE report_id = ?',
             [id]
         );
 
